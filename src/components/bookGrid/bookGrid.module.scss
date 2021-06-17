@@ -1,0 +1,21 @@
+:root {
+    --column-count: 6;
+
+    @media screen and (min-width: 550px) {
+        --column-count: 2;
+    }
+
+    @media screen and (min-width: 850px) {
+        --column-count: 3;
+    }
+
+    @media screen and (min-width: 1200px) {
+        --column-count: 4;
+    }
+}
+
+.bookGrid {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(var(--column-count), 1fr);
+}

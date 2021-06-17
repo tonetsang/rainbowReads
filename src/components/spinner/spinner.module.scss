@@ -1,0 +1,37 @@
+.spinner {
+    $color: gold;
+    $size: 5rem;
+
+    display: flex;
+    width: 100%;
+    min-height: 100%;
+    align-items: center;
+    justify-content: center;
+
+    .spinWheel {
+        width: $size;
+        height: $size;
+
+        &:after {
+            content: ' ';
+            display: block;
+            width: $size;
+            height: $size;
+            border-radius: 50%;
+            background: transparent;
+            border: 7px solid $color;
+            border-color: $color transparent $color transparent;
+            animation: spin 1.5s linear infinite;
+        }
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
