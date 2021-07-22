@@ -4,7 +4,7 @@ import Spinner from './components/spinner'
 import Overlay from './components/overlay'
 import Book from './components/book'
 import BookGrid from './components/bookGrid'
-import { Route } from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
 
 class App extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('https://gist.githubusercontent.com/tonetsang/e0fa7b407a491491ea71f51bf33826fd/raw/7ed2b7f217c8bc1687c44bbc2dc77bece42fc321/books.json')
+    fetch('https://gist.githubusercontent.com/tonetsang/e0fa7b407a491491ea71f51bf33826fd/raw/bb9237a34b434a42d3341c3e3380e3ac27f539bb/books.json')
       .then((res) => res.json())
       .then((json) => {
         this.setState({
@@ -36,26 +36,32 @@ class App extends Component {
           <Spinner />
         </Overlay>
       )
-    } else {
-        return (
-          <div className="app">
-            <header class="container">
-              <div class="text-center">
-                <img src="https://res.cloudinary.com/tonetsang/image/upload/v1623707504/rainbowReads/logo_kfsfgm.png" alt=""></img>
-              </div>
-            </header>
+    }else {
+      return (
+        <div className="App">
+          <header class="container">
+            <div class="text-center">
+              <img src="https://res.cloudinary.com/tonetsang/image/upload/v1623707504/rainbowReads/logo_kfsfgm.png" alt=""></img>
+              <p class="header">Top ?? LGBTQIA+ Books</p>
+            </div>
+          </header>
+            <Switch>
               <Route>
-                <BookGrid>
-                  <ol>
-                    {books.map((book) => (
-                      <li key={book.id}><Book {...book} /></li>
+                <ol>
+                  <BookGrid>
+                    {books.map(book => (
+                      <li key={book.id}>
+                        <Book {...book} />
+                      </li>
                     ))}
-                  </ol>
-                </BookGrid>
+                  </BookGrid>
+                </ol>
               </Route>
-          </div>
-        )
-      }
+              <Route path="/view/:id" render={books.id} />
+            </Switch>
+        </div>
+      )
+    }
   }
 }
 
