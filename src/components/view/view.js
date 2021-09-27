@@ -3,7 +3,7 @@ import styles from './view.module.scss'
 
 function View(props) {
     return (
-        <div className={styles.view}>
+        <div className={styles.view}> ddd
             <picture className={styles.picture}>
                 <img src={props.imageUrl} alt={props.title} />
             </picture>

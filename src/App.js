@@ -3,6 +3,7 @@ import './App.scss'
 import Spinner from './components/spinner'
 import Overlay from './components/overlay'
 import Book from './components/book'
+import View from './components/view'
 import BookGrid from './components/bookGrid'
 import { Switch, Route, Link } from 'react-router-dom'
 
@@ -17,7 +18,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('https://gist.githubusercontent.com/tonetsang/e0fa7b407a491491ea71f51bf33826fd/raw/bb9237a34b434a42d3341c3e3380e3ac27f539bb/books.json')
+    fetch('https://gist.githubusercontent.com/tonetsang/e0fa7b407a491491ea71f51bf33826fd/raw/88e50f141b3330f1712644b08a88f112df6f6697/books.json')
       .then((res) => res.json())
       .then((json) => {
         this.setState({
@@ -46,7 +47,7 @@ class App extends Component {
             </div>
           </header>
             <Switch>
-              <Route>
+              <Route exact path="/" render={() => 
                 <ol>
                   <BookGrid>
                     {books.map(book => (
@@ -56,8 +57,9 @@ class App extends Component {
                     ))}
                   </BookGrid>
                 </ol>
+              }>
               </Route>
-              <Route path="/view/:id" render={books.id} />
+              <Route exact path="/view/:id" component={View} />
             </Switch>
         </div>
       )
